@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 for i in range(25, -1, -1):
-    c = i + ord('A')
+    x = i + ord('A')
     if i % 2 == 1:
-        c += 32
-    print("{:x}".format(c), end="")
+        x += 32
+    print("{:c}".format(x), end="")
