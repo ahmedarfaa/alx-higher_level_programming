@@ -1,10 +1,11 @@
-#!/usr/bin/pyhton3
+#!/usr/bin/python3
+
 def safe_print_division(a, b):
+
     try:
-        res = a / b
-        print("Inside result: {:.1f}".format(res))
+        div = a / b
     except (TypeError, ZeroDivisionError):
-        res = None
-        print("Inside result: {}".format(res))
+        div = None
     finally:
-        return (res)
+        print("Inside result: {}".format(div))
+    return (div)
