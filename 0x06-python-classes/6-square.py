@@ -32,6 +32,7 @@ class Square:
     def position(self):
         """Get/set Current position of Square."""
         return (self.__position)
+
     @position.setter
     def position(self, value):
         if (not isinstance(value, tuple) or
@@ -44,6 +45,7 @@ class Square:
     def area(self):
         """Return Current area of Square."""
         return (self.__size * self.__size)
+
     def my_print(self):
         """Print Square with the # character."""
         if self.__size == 0:
