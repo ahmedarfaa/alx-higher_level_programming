@@ -4,7 +4,7 @@
 
 class Rectangle:
     """Represent a rectangle.
-    number_of_instances : number of objects 
+    number_of_instances : number of objects
     print_symbol: printing symbol """
 
     number_of_instances = 0
