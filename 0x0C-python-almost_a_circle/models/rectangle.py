@@ -90,6 +90,7 @@ class Rectangle(Base):
             print()
 
     def __str__(self):
+        """handleing str method"""
         return ("[{}] ({}) {}/{} - {}/{}"
                 .format(str(self.__class__.__name__), self.id,
                         self.__x, self.__y, self.__width, self.__height))
