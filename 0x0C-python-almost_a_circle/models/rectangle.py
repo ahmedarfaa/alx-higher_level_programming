@@ -94,7 +94,7 @@ class Rectangle(Base):
                 .format(str(self.__class__.__name__), self.id,
                         self.__x, self.__y, self.__width, self.__height))
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """updating the rec class with new args"""
         if args and len(args) != 0:
             a = 0
@@ -113,3 +113,18 @@ class Rectangle(Base):
                 elif a == 4:
                     self.y = arg
                 a += 1
+        else:
+            for key, value in kwargs.items():
+                if key == "id":
+                    if value is None:
+                        self.__init__(self.width, self.height, self.x, self.y)
+                    else:
+                        self.id = value
+                elif key == "width":
+                    self.width = value
+                elif key == "height":
+                    self.height = value
+                elif key == "x":
+                    self.x = value
+                elif key == "y":
+                    self.y = value
