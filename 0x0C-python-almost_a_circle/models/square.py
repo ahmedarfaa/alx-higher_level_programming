@@ -22,7 +22,7 @@ class Square(Rectangle):
     def size(self, value):
         """setting the property value"""
         if (type(value) is not int):
-            raise TypeError("width must be integer")
+            raise TypeError("width must be an integer")
         if value <= 0:
             raise ValueError("width must be > 0")
         self.__height = value
@@ -30,7 +30,7 @@ class Square(Rectangle):
 
     def __str__(self):
         """handleing __str__ method"""
-        return (" [{}] ({}) {}/{} - {}".format(str(self.__class__.__name__),
+        return ("[{}] ({}) {}/{} - {}".format(str(self.__class__.__name__),
                 self.id, self.x, self.y, self.size))
 
     def update(self, *args, **kwargs):
