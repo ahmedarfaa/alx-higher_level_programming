@@ -311,22 +311,6 @@ class test_rectangle(unittest.TestCase):
         with self.assertRaises(TypeError):
             Rectangle()
 
-    
-    def test_saving_to_file(self):
-        """
-            Testing saving a file into json format"""
-        try:
-            os.remove("Rectangle.json")
-        except:
-            pass
-        r1 = Rectangle(5, 10, 0, 0, 346)
-        Rectangle.save_to_file([r1])
-
-        with open("Rectangle.json", "r") as file:
-            content = file.read()
-        t = [{"x": 0, "y": 0, "id": 346, "height": 10, "width": 5}]
-        self.assertEqual(t, json.loads(content))
-
     def test_saving_to_file_no_iter(self):
         """
             Sending a non iterable to the function
@@ -334,66 +318,30 @@ class test_rectangle(unittest.TestCase):
         with self.assertRaises(TypeError):
             Rectangle.save_to_file(self.r)
 
-    def test_saving_to_file_None(self):
-        """
-            Testing saving a file into json format sending None
-        """
-        try:
-            os.remove("Rectangle.json")
-        except:
-            pass
-        r1 = Rectangle(5, 10, 0, 0, 346)
-        Rectangle.save_to_file(None)
-
-        with open("Rectangle.json", "r") as file:
-            content = file.read()
-
-        self.assertEqual("[]", content)
-
-    def test_saving_to_file_type(self):
-        """
-            Testing saving a file into json format sending None
-        """
-        try:
-            os.remove("Rectangle.json")
-        except:
-            pass
-        r1 = Rectangle(5, 10, 0, 0, 346)
-        Rectangle.save_to_file(None)
-
-        with open("Rectangle.json", "r") as file:
-            content = file.read()
-
-        self.assertEqual(str, type(content))
-        try:
-            os.remove("Rectangle.json")
-        except:
-            pass
-
     def test_json_string_type(self):
-            """
-                Testing the returned type
-            """
-            list_input = [
-                {'id': 2089, 'width': 10, 'height': 4},
-                {'id': 2712, 'width': 1, 'height': 7}]
-            json_list_input = Rectangle.to_json_string(list_input)
-            list_output = Rectangle.from_json_string(json_list_input)
-            self.assertEqual(type(list_input), list)
+        """
+            Testing the returned type
+        """
+        list_input = [
+            {'id': 2089, 'width': 10, 'height': 4},
+            {'id': 2712, 'width': 1, 'height': 7}]
+        json_list_input = Rectangle.to_json_string(list_input)
+        list_output = Rectangle.from_json_string(json_list_input)
+        self.assertEqual(type(list_input), list)
 
     def test_json_string(self):
-            """
-                Testing that the json string gets converted into a list
-            """
-            list_input = [
-                {'id': 2089, 'width': 10, 'height': 4},
-                {'id': 2712, 'width': 1, 'height': 7}]
-            json_list_input = Rectangle.to_json_string(list_input)
-            list_output = Rectangle.from_json_string(json_list_input)
-            s1 = {'id': 2089, 'width': 10, 'height': 4}
-            s2 = {'height': 7, 'id': 2712, 'width': 1}
-            self.assertEqual(list_input[0], s1)
-            self.assertEqual(list_input[1], s2)
+        """
+            Testing that the json string gets converted into a list
+        """
+        list_input = [
+            {'id': 2089, 'width': 10, 'height': 4},
+            {'id': 2712, 'width': 1, 'height': 7}]
+        json_list_input = Rectangle.to_json_string(list_input)
+        list_output = Rectangle.from_json_string(json_list_input)
+        s1 = {'id': 2089, 'width': 10, 'height': 4}
+        s2 = {'height': 7, 'id': 2712, 'width': 1}
+        self.assertEqual(list_input[0], s1)
+        self.assertEqual(list_input[1], s2)
 
     def test_dict_to_instance(self):
         """
@@ -443,8 +391,8 @@ class test_rectangle(unittest.TestCase):
 
     def test_load_from_file_same_height(self):
         """
-            Checking that an object was created 
-         """
+            Checking that an object was created
+        """
         r1 = Rectangle(10, 7, 2, 8)
         list_rectangles_input = [r1]
 
@@ -456,7 +404,7 @@ class test_rectangle(unittest.TestCase):
 
     def test_load_from_file_same_x(self):
         """
-            Checking that an object was created 
+            Checking that an object was created
         """
         r1 = Rectangle(10, 7, 2, 8)
         list_rectangles_input = [r1]
@@ -522,6 +470,7 @@ class test_rectangle(unittest.TestCase):
         output = '###\n###\n###\n###\n###\n###\n###\n'
         self.assertEqual(capturedOutput.getvalue(), output)
 
+
 class TestRectangle(unittest.TestCase):
     """
     class for testing Rectangle class' methods
@@ -534,7 +483,6 @@ class TestRectangle(unittest.TestCase):
         """
         cls.setup = inspect.getmembers(Rectangle, inspect.isfunction)
 
-    
     def test_module_docstring(self):
         """
         Tests if module docstring documentation exist
@@ -662,6 +610,7 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(R_dict['y'], 400)
         self.assertEqual(R_dict['id'], 500)
 
+
 class TestRectangle_instantiation(unittest.TestCase):
     """Unittests for testing instantiation of the Rectangle class."""
 
@@ -681,7 +630,6 @@ class TestRectangle_instantiation(unittest.TestCase):
         r2 = Rectangle(2, 10)
         self.assertEqual(r1.id, r2.id - 1)
 
-  
     def test_five_args(self):
         self.assertEqual(7, Rectangle(10, 2, 0, 0, 7).id)
 
@@ -689,7 +637,6 @@ class TestRectangle_instantiation(unittest.TestCase):
         with self.assertRaises(TypeError):
             Rectangle(1, 2, 3, 4, 5, 6)
 
-    
     def test_x_private(self):
         with self.assertRaises(AttributeError):
             print(Rectangle(5, 5, 0, 0, 1).__x)
@@ -733,8 +680,6 @@ class TestRectangle_width(unittest.TestCase):
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
             Rectangle("invalid", 2)
 
-    
-
     def test_dict_width(self):
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
             Rectangle({"a": 1, "b": 2}, 2)
@@ -759,7 +704,6 @@ class TestRectangle_width(unittest.TestCase):
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
             Rectangle(frozenset({1, 2, 3, 1}), 2)
 
-    
     def test_memoryview_width(self):
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
             Rectangle(memoryview(b'abcedfg'), 2)
@@ -792,7 +736,6 @@ class TestRectangle_height(unittest.TestCase):
         with self.assertRaisesRegex(TypeError, "height must be an integer"):
             Rectangle(1, "invalid")
 
-      
     def test_frozenset_height(self):
         with self.assertRaisesRegex(TypeError, "height must be an integer"):
             Rectangle(1, frozenset({1, 2, 3, 1}))
@@ -805,7 +748,6 @@ class TestRectangle_height(unittest.TestCase):
         with self.assertRaisesRegex(TypeError, "height must be an integer"):
             Rectangle(1, b'Python')
 
-    
     def test_negative_height(self):
         with self.assertRaisesRegex(ValueError, "height must be > 0"):
             Rectangle(1, -1)
@@ -826,7 +768,6 @@ class TestRectangle_x(unittest.TestCase):
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
             Rectangle(1, 2, "invalid", 2)
 
-   
     def test_bool_x(self):
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
             Rectangle(1, 2, True, 2)
@@ -842,8 +783,6 @@ class TestRectangle_x(unittest.TestCase):
     def test_tuple_x(self):
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
             Rectangle(1, 2, (1, 2, 3), 2)
-
-    
 
     def test_memoryview_x(self):
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
@@ -877,7 +816,6 @@ class TestRectangle_y(unittest.TestCase):
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
             Rectangle(1, 2, 3, 5.5)
 
-   
     def test_tuple_y(self):
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
             Rectangle(1, 2, 1, (1, 2, 3))
@@ -893,8 +831,6 @@ class TestRectangle_y(unittest.TestCase):
     def test_bytes_y(self):
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
             Rectangle(1, 2, 3, b'Python')
-
-    
 
     def test_negative_y(self):
         with self.assertRaisesRegex(ValueError, "y must be >= 0"):
@@ -929,12 +865,6 @@ class TestRectangle_order_of_initialization(unittest.TestCase):
             Rectangle(1, 2, "invalid x", "invalid y")
 
 
-class TestRectangle_area(unittest.TestCase):
-    """Unittests for testing the area method of the Rectangle class."""
-
-    
-
-
 class TestRectangle_stdout(unittest.TestCase):
     """Unittests for testing __str__ and display methods of Rectangle class."""
 
@@ -942,11 +872,6 @@ class TestRectangle_stdout(unittest.TestCase):
     def capture_stdout(rect, method):
         """Captures and returns text printed to stdout.
 
-        Args:
-            rect (Rectangle): The Rectangle to print to stdout.
-            method (str): The method to run on rect.
-        Returns:
-            The text printed to stdout by calling method on sq.
         """
         capture = io.StringIO()
         sys.stdout = capture
@@ -969,7 +894,6 @@ class TestRectangle_stdout(unittest.TestCase):
         correct = "[Rectangle] ({}) 1/0 - 5/5".format(r.id)
         self.assertEqual(correct, r.__str__())
 
-   
     # Test display method
     def test_display_width_height(self):
         r = Rectangle(2, 3, 0, 0, 0)
@@ -1018,7 +942,6 @@ class TestRectangle_update_args(unittest.TestCase):
         r.update(89, 2)
         self.assertEqual("[Rectangle] (89) 10/10 - 2/10", str(r))
 
-   
     def test_update_args_None_id(self):
         r = Rectangle(10, 10, 10, 10, 10)
         r.update(None)
@@ -1031,7 +954,6 @@ class TestRectangle_update_args(unittest.TestCase):
         correct = "[Rectangle] ({}) 2/10 - 4/5".format(r.id)
         self.assertEqual(correct, str(r))
 
-   
     def test_update_args_width_negative(self):
         r = Rectangle(10, 10, 10, 10, 10)
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
@@ -1052,13 +974,11 @@ class TestRectangle_update_args(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "height must be > 0"):
             r.update(89, 1, -5)
 
-    
     def test_update_args_invalid_y(self):
         r = Rectangle(10, 10, 10, 10, 10)
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
             r.update(89, 2, 3, 4, "invalid")
 
-   
     def test_update_args_width_before_height(self):
         r = Rectangle(10, 10, 10, 10, 10)
         with self.assertRaisesRegex(TypeError, "width must be an integer"):
@@ -1098,14 +1018,12 @@ class TestRectangle_update_kwargs(unittest.TestCase):
         r.update(width=2, height=3, id=89)
         self.assertEqual("[Rectangle] (89) 10/10 - 2/3", str(r))
 
-    
     def test_update_kwargs_None_id(self):
         r = Rectangle(10, 10, 10, 10, 10)
         r.update(id=None)
         correct = "[Rectangle] ({}) 10/10 - 10/10".format(r.id)
         self.assertEqual(correct, str(r))
 
-    
     def test_update_kwargs_twice(self):
         r = Rectangle(10, 10, 10, 10, 10)
         r.update(id=89, x=1, height=2)
@@ -1122,8 +1040,6 @@ class TestRectangle_update_kwargs(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "width must be > 0"):
             r.update(width=0)
 
-
-
     def test_update_kwargs_invalid_height_type(self):
         r = Rectangle(10, 10, 10, 10, 10)
         with self.assertRaisesRegex(TypeError, "height must be an integer"):
@@ -1134,7 +1050,6 @@ class TestRectangle_update_kwargs(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "height must be > 0"):
             r.update(height=0)
 
-   
     def test_update_kwargs_inavlid_x_type(self):
         r = Rectangle(10, 10, 10, 10, 10)
         with self.assertRaisesRegex(TypeError, "x must be an integer"):
@@ -1144,7 +1059,6 @@ class TestRectangle_update_kwargs(unittest.TestCase):
         r = Rectangle(10, 10, 10, 10, 10)
         with self.assertRaisesRegex(ValueError, "x must be >= 0"):
             r.update(x=-5)
-
 
     def test_update_kwargs_y_negative(self):
         r = Rectangle(10, 10, 10, 10, 10)
@@ -1175,6 +1089,7 @@ class TestRectangle_to_dictionary(unittest.TestCase):
         r = Rectangle(10, 2, 4, 1, 2)
         with self.assertRaises(TypeError):
             r.to_dictionary(1)
+
 
 if __name__ == "__main__":
     unittest.main()

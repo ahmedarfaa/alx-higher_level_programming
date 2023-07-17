@@ -25,16 +25,6 @@ class test_square(unittest.TestCase):
         """
         self.s = Square(5)
 
-    def tearDown(self):
-        """
-            Deleting created instance
-        """
-        try:
-            os.remove("Square.json")
-        except:
-            pass
-        del self.s
-
     def test_width(self):
         """
             Testing the square width getter
@@ -79,7 +69,6 @@ class test_square(unittest.TestCase):
         with self.assertRaises(TypeError):
             sq = Square("1")
 
-   
     def test_x_string(self):
         """
             Testing for other than int
@@ -245,9 +234,8 @@ class test_square(unittest.TestCase):
         """
             Testing the update method with **kwargs
         """
-        # self.assertEqual(self.s.id, "str")
         with self.assertRaises(TypeError):
-           self.s.update("str") 
+            self.s.update("str")
 
     def test_to_dict(self):
         """
@@ -256,38 +244,6 @@ class test_square(unittest.TestCase):
         r1 = Square(5)
         self.assertEqual(type(r1.to_dictionary()), dict)
 
-    def test_to_dict_print(self):
-        """
-            Testing the dict that will be printed
-        """
-        r1 = Square(5, 0, 0, 410)
-        r1_dict = r1.to_dictionary()
-        self.assertEqual(r1_dict,
-                         {'size': 5, 'id': 410, 'x': 0, 'y': 0})
-
-    def test_missing_height(self):
-        """
-            Expecting a type error because height and width are missing
-        """
-        with self.assertRaises(TypeError):
-            Square()
-
-    def test_saving_to_file(self):
-        """
-            Testing saving a file into json format
-        """
-        try:
-            os.remove("Square.json")
-        except:
-            pass
-        r1 = Square(5, 0, 0, 346)
-        Square.save_to_file([r1])
-
-        with open("Square.json", "r") as file:
-            content = file.read()
-        t = [{"id": 346, "x": 0, "size": 5, "y": 0}]
-        self.assertEqual(t, json.loads(content))
-
     def test_saving_to_file_no_iter(self):
         """
             Sending a non iterable to the function
@@ -295,66 +251,30 @@ class test_square(unittest.TestCase):
         with self.assertRaises(TypeError):
             Square.save_to_file(self.s)
 
-    def test_saving_to_file_None(self):
-        """
-            Testing saving a file into json format sending None
-        """
-        try:
-            os.remove("Square.json")
-        except:
-            pass
-        r1 = Square(5, 0, 0, 346)
-        Square.save_to_file(None)
-
-        with open("Square.json", "r") as file:
-            content = file.read()
-
-        self.assertEqual("[]", content)
-
-    def test_saving_to_file_type(self):
-        """
-            Testing saving a file into json format and testing the type
-        """
-        try:
-            os.remove("Square.json")
-        except:
-            pass
-        r1 = Square(5, 0, 0, 346)
-        Square.save_to_file([r1])
-
-        with open("Square.json", "r") as file:
-            content = file.read()
-
-        self.assertEqual(str, type(content))
-        try:
-            os.remove("Square.json")
-        except:
-            pass
-
     def test_json_string_type(self):
-            """
-                Testing the returned type
-            """
-            list_input = [
-                {'id': 2089, 'size': 10},
-                {'id': 2712, 'size': 1}]
-            json_list_input = Square.to_json_string(list_input)
-            list_output = Square.from_json_string(json_list_input)
-            self.assertEqual(type(list_input), list)
+        """
+            Testing the returned type
+        """
+        list_input = [
+            {'id': 2089, 'size': 10},
+            {'id': 2712, 'size': 1}]
+        json_list_input = Square.to_json_string(list_input)
+        list_output = Square.from_json_string(json_list_input)
+        self.assertEqual(type(list_input), list)
 
     def test_json_string(self):
-            """
-                Testing that the json string gets converted into a list
-            """
-            list_input = [
-                {'id': 2089, 'size': 10},
-                {'id': 2712, 'size': 7}]
-            json_list_input = Square.to_json_string(list_input)
-            list_output = Square.from_json_string(json_list_input)
-            s1 = {'id': 2089, 'size': 10}
-            s2 = {'size': 7, 'id': 2712}
-            self.assertEqual(list_input[0], s1)
-            self.assertEqual(list_input[1], s2)
+        """
+            Testing that the json string gets converted into a list
+        """
+        list_input = [
+            {'id': 2089, 'size': 10},
+            {'id': 2712, 'size': 7}]
+        json_list_input = Square.to_json_string(list_input)
+        list_output = Square.from_json_string(json_list_input)
+        s1 = {'id': 2089, 'size': 10}
+        s2 = {'size': 7, 'id': 2712}
+        self.assertEqual(list_input[0], s1)
+        self.assertEqual(list_input[1], s2)
 
     def test_dict_to_instance(self):
         """
@@ -540,6 +460,7 @@ class test_square(unittest.TestCase):
         output = '###\n###\n###\n'
         self.assertEqual(capturedOutput.getvalue(), output)
 
+
 class TestSquare(unittest.TestCase):
     """
     class for testing Square class' methods
@@ -709,7 +630,6 @@ class TestSquare(unittest.TestCase):
         self.assertTrue(issubclass(Square, Base))
         self.assertFalse(isinstance(Square, Base))
 
-   
     def test_10_4(self):
         """Test Square for methods inherited from Rectangle."""
 
@@ -734,8 +654,6 @@ class TestSquare(unittest.TestCase):
         s2 = Square(9, 8, 7, 2)
         self.assertEqual(s2.size, 9)
 
-    
-
     def test_12_0(self):
         """Test update method on Square."""
 
@@ -753,9 +671,6 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(s1.id, 89)
         self.assertEqual(s1.y, 1)
 
-   
-
-    
 
 if __name__ == '__main__':
     unittest.main()

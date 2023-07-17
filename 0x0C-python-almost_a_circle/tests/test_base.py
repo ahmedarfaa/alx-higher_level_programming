@@ -6,7 +6,6 @@ import json
 import inspect
 
 
-
 class test_base(unittest.TestCase):
     '''
         Testing base
