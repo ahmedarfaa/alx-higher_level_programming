@@ -77,3 +77,15 @@ class Rectangle(Base):
     def area(self):
         """Defining anew method that retrives the area of rec"""
         return (self.__height * self.__width)
+
+    def display(self):
+        """Creating a method that draw a Rec in # shap"""
+        for i in range(self.__height):
+            for j in range(self.__width):
+                print("#", end="")
+            print()
+
+    def __str__(self):
+        return ("[{}] ({}) {}/{} - {}/{}"
+                .format(str(self.__class__.__name__), self.id,
+                        self.__x, self.__y, self.__width, self.__height))
